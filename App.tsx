@@ -1,5 +1,5 @@
 import * as React from "react"
-import { AppRegistry } from "react-native"
+import { AppRegistry, Platform } from "react-native"
 import { Provider as PaperProvider, MD3DarkTheme } from "react-native-paper"
 import { expo } from "./app.json"
 import App from "./interface/Index"
@@ -11,6 +11,13 @@ const theme = {
 }
 
 export default function Main() {
+	React.useEffect(() => {
+		if (Platform.OS === "web") {
+			document.body.style.overflowY = "hidden"
+			document.body.style.height = "100%"
+		}
+	}, [])
+
 	return (
 		<PaperProvider theme={theme}>
 			<NavigationContainer theme={DarkTheme}>
