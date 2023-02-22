@@ -45,22 +45,14 @@ const Drawer = () => {
 
 	return (
 		<>
-			<div className="drawer drawer-mobile fixed">
-				<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-				<div className="drawer-side mb-32">
-					<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-					<ul className="menu p-4 w-80 text-base-content bg-gray-800">
-						{data.map((item: any, index: number) => {
-							return (
-								<li key={index}>
-									<a className={`${active === `selected${index}` ? "bg-gray-700" : ""}`} onClick={() => setActive(`selected${index}`)}>
-										{item.name}
-									</a>
-								</li>
-							)
-						})}
-					</ul>
-				</div>
+			<div className="sm:flex flex-col w-80 overflow-auto hidden p-3">
+				{data.map((item: any, index: number) => {
+					return (
+						<a key={index} className={`p-3 break-words cursor-pointer rounded-xl ${active === `selected${index}` ? "bg-gray-800" : ""}`} onClick={() => setActive(`selected${index}`)}>
+							{item.name}
+						</a>
+					)
+				})}
 			</div>
 		</>
 	)
