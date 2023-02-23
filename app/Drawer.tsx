@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react"
+import route, { changeRoute } from "./store"
+import { useStore } from "@nanostores/react"
 
 interface entries {
 	name: string
@@ -19,7 +21,7 @@ interface res {
 
 const Drawer = () => {
 	const [data, setData] = useState<any>([])
-	const [active, setActive] = React.useState("selected0")
+	const [active, setActive] = useState("selected0")
 
 	const getChapters = async () => {
 		let url = "https://documents.devdocs.io/rust/index.json"
@@ -34,9 +36,13 @@ const Drawer = () => {
 			}
 		}
 
-		console.log(entries)
-
 		setData(entries)
+	}
+
+	const clicked = (index: number) => {
+		setActive(`selected${index}`)
+
+		changeRoute(data[index].path)
 	}
 
 	useEffect(() => {
@@ -45,10 +51,10 @@ const Drawer = () => {
 
 	return (
 		<>
-			<div className="sm:flex flex-col w-80 overflow-auto hidden p-3">
+			<div className="hidden w-80 flex-col overflow-auto p-3 sm:flex">
 				{data.map((item: any, index: number) => {
 					return (
-						<a key={index} className={`p-3 break-words cursor-pointer rounded-xl ${active === `selected${index}` ? "bg-gray-800" : ""}`} onClick={() => setActive(`selected${index}`)}>
+						<a key={index} className={`0 m-1 cursor-pointer break-words rounded-xl p-3 duration-200 hover:bg-gray-700 ${active === `selected${index}` ? "bg-gray-800 hover:bg-gray-700" : ""}`} onClick={() => clicked(index)}>
 							{item.name}
 						</a>
 					)
