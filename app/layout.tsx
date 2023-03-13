@@ -3,6 +3,7 @@
 import BottomNav from "./BottomNav"
 import Drawer from "./Drawer"
 import "./index.css"
+import "./code.css"
 import TopNav from "./TopNav"
 import { useState } from "react"
 
